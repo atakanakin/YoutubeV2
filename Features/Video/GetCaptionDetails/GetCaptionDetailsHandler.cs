@@ -15,13 +15,20 @@ public sealed class GetCaptionDetailsHandler(YoutubeClient youtubeClient, ILogge
 
     public async Task<CaptionDetailsResult?> Handle(GetCaptionDetailsQuery request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Fetching caption details for: {VideoIdOrUrl}", request.VideoIdOrUrl);
+        
         try
         {
             var videoId = VideoId.Parse(request.VideoIdOrUrl);
             
             var captionManifest = await _youtubeClient.Videos.ClosedCaptions.GetManifestAsync(videoId, cancellationToken);
 
-            return VideoResultMapper.MapToCaptionDetailsResult(captionManifest);
+            var result = VideoResultMapper.MapToCaptionDetailsResult(captionManifest);
+            
+            _logger.LogInformation("Successfully fetched caption details for: {VideoIdOrUrl} - CaptionTracks: {CaptionCount}", 
+                request.VideoIdOrUrl, result.CaptionTracks.Count);
+            
+            return result;
         }
         catch (ArgumentException ex)
         {

@@ -15,6 +15,8 @@ public sealed class GetAudioDetailsHandler(YoutubeClient youtubeClient, ILogger<
 
     public async Task<AudioDetailsResult?> Handle(GetAudioDetailsQuery request, CancellationToken cancellationToken)
     {
+        _logger.LogInformation("Fetching audio details for: {VideoIdOrUrl}", request.VideoIdOrUrl);
+        
         try
         {
             var videoId = VideoId.Parse(request.VideoIdOrUrl);
@@ -27,7 +29,12 @@ public sealed class GetAudioDetailsHandler(YoutubeClient youtubeClient, ILogger<
             var video = await videoTask;
             var streamManifest = await streamManifestTask;
 
-            return VideoResultMapper.MapToAudioDetailsResult(video, streamManifest);
+            var result = VideoResultMapper.MapToAudioDetailsResult(video, streamManifest);
+            
+            _logger.LogInformation("Successfully fetched audio details for: {VideoIdOrUrl} - Title: {Title}, AudioStreams: {AudioCount}", 
+                request.VideoIdOrUrl, result.Metadata.Title, result.AudioStreams.Count);
+            
+            return result;
         }
         catch (ArgumentException ex)
         {
