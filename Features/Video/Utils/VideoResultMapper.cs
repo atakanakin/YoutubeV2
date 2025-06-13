@@ -22,6 +22,20 @@ public static class VideoResultMapper
         };
     }
 
+    public static AudioDetailsResult MapToAudioDetailsResult(
+        Video video,
+        StreamManifest streamManifest)
+    {
+        var metadata = MapToVideoMetadata(video);
+        var audioStreams = MapToAudioStreams(streamManifest.GetAudioOnlyStreams());
+
+        return new AudioDetailsResult
+        {
+            Metadata = metadata,
+            AudioStreams = audioStreams
+        };
+    }
+
     private static VideoMetadata MapToVideoMetadata(Video video)
     {
         return new VideoMetadata
