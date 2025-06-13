@@ -2,8 +2,6 @@ namespace YoutubeV2.Features.Search.SearchAll;
 
 using MediatR;
 using YoutubeExplode;
-using YoutubeExplode.Search;
-using YoutubeV2.Features.Search.Models;
 using YoutubeV2.Features.Search.Utils;
 
 public sealed class SearchAllHandler : IRequestHandler<SearchAllQuery, IReadOnlyList<object>>

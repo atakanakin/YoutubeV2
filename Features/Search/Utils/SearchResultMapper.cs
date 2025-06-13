@@ -1,9 +1,6 @@
 namespace YoutubeV2.Features.Search.Utils;
 
-using YoutubeExplode.Search;
-using YoutubeV2.Features.Search.Models;
 using YoutubeV2.Features.Search.Constants;
-using AngleSharp.Dom;
 
 public static class SearchResultMapper
 {

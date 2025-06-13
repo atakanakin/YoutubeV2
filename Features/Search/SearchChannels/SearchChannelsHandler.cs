@@ -3,7 +3,6 @@ namespace YoutubeV2.Features.Search.SearchChannels;
 using MediatR;
 using YoutubeExplode;
 using YoutubeV2.Features.Search.Models;
-using YoutubeV2.Features.Search.Constants;
 using YoutubeV2.Features.Search.Utils;
 
 public sealed class SearchChannelsHandler : IRequestHandler<SearchChannelsQuery, IReadOnlyList<ChannelSearchResult>>
