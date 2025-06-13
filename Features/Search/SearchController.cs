@@ -81,7 +81,7 @@ public sealed class SearchController : ControllerBase
     /// Search all YouTube content (videos, channels, playlists) mixed together
     /// </summary>
     [HttpGet("all")]
-    public async Task<ActionResult<IReadOnlyList<MixedSearchResult>>> SearchAll(
+    public async Task<ActionResult<IReadOnlyList<object>>> SearchAll(
         [FromQuery] string query,
         [FromQuery] int page = SearchConstants.Pagination.DefaultPage,
         [FromQuery] int pageSize = SearchConstants.Pagination.DefaultPageSize,

@@ -8,4 +8,4 @@ public sealed record SearchAllQuery(
     string Query,
     int Page = SearchConstants.Pagination.DefaultPage,
     int PageSize = SearchConstants.Pagination.DefaultPageSize
-) : IRequest<IReadOnlyList<MixedSearchResult>>;
+) : IRequest<IReadOnlyList<object>>;

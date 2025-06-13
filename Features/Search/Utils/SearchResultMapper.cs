@@ -3,6 +3,7 @@ namespace YoutubeV2.Features.Search.Utils;
 using YoutubeExplode.Search;
 using YoutubeV2.Features.Search.Models;
 using YoutubeV2.Features.Search.Constants;
+using AngleSharp.Dom;
 
 public static class SearchResultMapper
 {
@@ -11,6 +12,7 @@ public static class SearchResultMapper
         return new Models.VideoSearchResult(
             Id: youtubeVideo.Id.Value,
             Title: youtubeVideo.Title,
+            Url: youtubeVideo.Url,
             Author: youtubeVideo.Author.ChannelTitle ?? SearchConstants.VideoDefaults.UnknownAuthor,
             ChannelId: youtubeVideo.Author.ChannelId.Value,
             ChannelUrl: youtubeVideo.Author.ChannelUrl,
@@ -38,6 +40,7 @@ public static class SearchResultMapper
         return new Models.PlaylistSearchResult(
             Id: youtubePlaylist.Id.Value,
             Title: youtubePlaylist.Title ?? SearchConstants.VideoDefaults.UnknownPlaylist,
+            Url: youtubePlaylist.Url,
             Author: youtubePlaylist.Author?.ChannelTitle ?? SearchConstants.VideoDefaults.UnknownAuthor,
             ChannelId: youtubePlaylist.Author?.ChannelId.Value ?? string.Empty,
             ChannelUrl: youtubePlaylist.Author?.ChannelUrl ?? string.Empty,
