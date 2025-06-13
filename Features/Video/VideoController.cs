@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using YoutubeV2.Features.Video.Constants;
 using YoutubeV2.Features.Video.GetVideoDetails;
 using YoutubeV2.Features.Video.GetAudioDetails;
+using YoutubeV2.Features.Video.GetCaptionDetails;
 using YoutubeV2.Features.Video.Models;
 
 [ApiController]
@@ -52,6 +53,30 @@ public sealed class VideoController(IMediator mediator) : ControllerBase
         }
 
         var query = new GetAudioDetailsQuery(videoIdOrUrl);
+        var result = await _mediator.Send(query);
+        
+        if (result == null)
+        {
+            return NotFound(new { error = VideoConstants.ErrorMessages.VideoNotFound });
+        }
+        
+        return Ok(result);
+    }
+
+    /// <summary>
+    /// Get all available caption tracks for a video
+    /// </summary>
+    /// <param name="videoIdOrUrl">YouTube video ID or full URL</param>
+    /// <returns>All available caption tracks</returns>
+    [HttpGet("caption")]
+    public async Task<ActionResult<CaptionDetailsResult>> GetCaptionDetails([FromQuery] string videoIdOrUrl)
+    {
+        if (string.IsNullOrWhiteSpace(videoIdOrUrl))
+        {
+            return BadRequest(new { error = VideoConstants.ErrorMessages.InvalidVideoId });
+        }
+
+        var query = new GetCaptionDetailsQuery(videoIdOrUrl);
         var result = await _mediator.Send(query);
         
         if (result == null)
