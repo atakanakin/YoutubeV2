@@ -2,13 +2,6 @@ namespace YoutubeV2.Features.Search.Constants;
 
 public static class SearchConstants
 {
-    public static class Thumbnails
-    {
-        // TODO: Add default URL's
-        public const string DefaultThumbnailUrl = "https://img.youtube.com/vi/default/default.jpg";
-        public const string DefaultChannelThumbnailUrl = "https://yt3.ggpht.com/default_channel_avatar.png";
-    }
-
     public static class Pagination
     {
         public const int DefaultPageSize = 20;

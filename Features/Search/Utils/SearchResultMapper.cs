@@ -1,6 +1,7 @@
 namespace YoutubeV2.Features.Search.Utils;
 
 using YoutubeV2.Features.Search.Constants;
+using YoutubeV2.Shared.Constants;
 
 public static class SearchResultMapper
 {
@@ -16,7 +17,7 @@ public static class SearchResultMapper
             Duration: youtubeVideo.Duration,
             ThumbnailUrl: youtubeVideo.Thumbnails
                 .OrderByDescending(t => t.Resolution.Area)
-                .FirstOrDefault()?.Url ?? SearchConstants.Thumbnails.DefaultThumbnailUrl
+                .FirstOrDefault()?.Url ?? ThumbnailConstants.DefaultThumbnailUrl
         );
     }
 
@@ -28,7 +29,7 @@ public static class SearchResultMapper
             Url: youtubeChannel.Url,
             ThumbnailUrl: youtubeChannel.Thumbnails
                 .OrderByDescending(t => t.Resolution.Area)
-                .FirstOrDefault()?.Url ?? SearchConstants.Thumbnails.DefaultChannelThumbnailUrl
+                .FirstOrDefault()?.Url ?? ThumbnailConstants.DefaultChannelThumbnailUrl
         );
     }
 
@@ -43,7 +44,7 @@ public static class SearchResultMapper
             ChannelUrl: youtubePlaylist.Author?.ChannelUrl ?? string.Empty,
             ThumbnailUrl: youtubePlaylist.Thumbnails
                 .OrderByDescending(t => t.Resolution.Area)
-                .FirstOrDefault()?.Url ?? SearchConstants.Thumbnails.DefaultThumbnailUrl
+                .FirstOrDefault()?.Url ?? ThumbnailConstants.DefaultThumbnailUrl
         );
     }
 }
