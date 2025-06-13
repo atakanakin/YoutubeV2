@@ -47,6 +47,10 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[9.0.6, )"
+            },
+            "YoutubeExplode": {
+              "target": "Package",
+              "version": "[6.5.4, )"
             }
           },
           "imports": [

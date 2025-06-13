@@ -1,11 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "Q37qCpnG8o8=",
+  "dgSpecHash": "LzHdZQ5HJwk=",
   "success": true,
   "projectFilePath": "/Users/akina/Documents/Projects/personal/YoutubeV2/YoutubeV2.csproj",
   "expectedPackageFiles": [
+    "/Users/akina/.nuget/packages/anglesharp/1.2.0/anglesharp.1.2.0.nupkg.sha512",
     "/Users/akina/.nuget/packages/microsoft.aspnetcore.openapi/9.0.6/microsoft.aspnetcore.openapi.9.0.6.nupkg.sha512",
-    "/Users/akina/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512"
+    "/Users/akina/.nuget/packages/microsoft.openapi/1.6.17/microsoft.openapi.1.6.17.nupkg.sha512",
+    "/Users/akina/.nuget/packages/youtubeexplode/6.5.4/youtubeexplode.6.5.4.nupkg.sha512"
   ],
   "logs": []
 }
