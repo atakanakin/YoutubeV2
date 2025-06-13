@@ -1,3 +1,5 @@
+using YoutubeV2.Shared.Models;
+
 namespace YoutubeV2.Features.Search.Models;
 
 public sealed record VideoSearchResult(
@@ -8,7 +10,7 @@ public sealed record VideoSearchResult(
     string ChannelId,
     string ChannelUrl,
     TimeSpan? Duration,
-    string ThumbnailUrl
+    IReadOnlyList<ThumbnailInfo> Thumbnails
 ) : ISearchResult
 {
     public SearchResultType Type => SearchResultType.Video;

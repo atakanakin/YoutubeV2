@@ -1,3 +1,5 @@
+using YoutubeV2.Shared.Models;
+
 namespace YoutubeV2.Features.Search.Models;
 
 public sealed record PlaylistSearchResult(
@@ -7,7 +9,7 @@ public sealed record PlaylistSearchResult(
     string Author,
     string ChannelId,
     string ChannelUrl,
-    string ThumbnailUrl
+    IReadOnlyList<ThumbnailInfo> Thumbnails
 ) : ISearchResult
 {
     public SearchResultType Type => SearchResultType.Playlist;

@@ -4,6 +4,7 @@ using YoutubeExplode.Videos;
 using YoutubeExplode.Videos.Streams;
 using YoutubeExplode.Videos.ClosedCaptions;
 using YoutubeV2.Features.Video.Models;
+using YoutubeV2.Shared.Utils;
 
 public static class VideoResultMapper
 {
@@ -60,9 +61,7 @@ public static class VideoResultMapper
             Duration = video.Duration ?? TimeSpan.Zero,
             Description = video.Description,
             Keywords = [.. video.Keywords],
-            ThumbnailUrl = video.Thumbnails.
-                OrderByDescending(t => t.Resolution.Area)
-                .FirstOrDefault()?.Url ?? string.Empty,
+            Thumbnails = ThumbnailMapper.MapToThumbnails(video.Thumbnails),
             UploadDate = video.UploadDate,
             ViewCount = video.Engagement?.ViewCount,
             LikeCount = video.Engagement?.LikeCount,
@@ -111,4 +110,6 @@ public static class VideoResultMapper
             Url = track.Url
         })];
     }
+
+
 }
