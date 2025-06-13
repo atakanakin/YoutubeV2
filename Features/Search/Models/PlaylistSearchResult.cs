@@ -1,14 +1,13 @@
 namespace YoutubeV2.Features.Search.Models;
 
-public sealed record VideoSearchResult(
+public sealed record PlaylistSearchResult(
     string Id,
     string Title,
     string Author,
     string ChannelId,
     string ChannelUrl,
-    TimeSpan? Duration,
     string ThumbnailUrl
 ) : ISearchResult
 {
-    public SearchResultType Type => SearchResultType.Video;
+    public SearchResultType Type => SearchResultType.Playlist;
 }

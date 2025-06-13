@@ -20,5 +20,6 @@ public static class SearchConstants
     public static class VideoDefaults
     {
         public const string UnknownAuthor = "Unknown Channel";
+        public const string UnknownPlaylist = "Unknown Playlist";
     }
 }

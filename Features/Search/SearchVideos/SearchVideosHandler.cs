@@ -4,6 +4,7 @@ using MediatR;
 using YoutubeExplode;
 using YoutubeV2.Features.Search.Models;
 using YoutubeV2.Features.Search.Constants;
+using YoutubeV2.Features.Search.Utils;
 
 public sealed class SearchVideosHandler : IRequestHandler<SearchVideosQuery, IReadOnlyList<VideoSearchResult>>
 {
@@ -39,17 +40,7 @@ public sealed class SearchVideosHandler : IRequestHandler<SearchVideosQuery, IRe
             if (addedCount >= request.PageSize)
                 break;
 
-            results.Add(new VideoSearchResult(
-                Id: video.Id.Value,
-                Title: video.Title,
-                Author: video.Author.ChannelTitle ?? SearchConstants.VideoDefaults.UnknownAuthor,
-                ChannelId: video.Author.ChannelId.Value,
-                ChannelUrl: video.Author.ChannelUrl,
-                Duration: video.Duration,
-                ThumbnailUrl: video.Thumbnails
-                    .OrderByDescending(t => t.Resolution.Area)
-                    .FirstOrDefault()?.Url ?? SearchConstants.Thumbnails.DefaultThumbnailUrl
-            ));
+            results.Add(SearchResultMapper.MapToVideoSearchResult(video));
 
             addedCount++;
             currentIndex++;
