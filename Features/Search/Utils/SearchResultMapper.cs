@@ -1,6 +1,7 @@
 namespace YoutubeV2.Features.Search.Utils;
 
 using YoutubeV2.Features.Search.Constants;
+using YoutubeV2.Shared.Utils;
 
 public static class SearchResultMapper
 {
@@ -14,9 +15,7 @@ public static class SearchResultMapper
             ChannelId: youtubeVideo.Author.ChannelId.Value,
             ChannelUrl: youtubeVideo.Author.ChannelUrl,
             Duration: youtubeVideo.Duration,
-            ThumbnailUrl: youtubeVideo.Thumbnails
-                .OrderByDescending(t => t.Resolution.Area)
-                .FirstOrDefault()?.Url ?? SearchConstants.Thumbnails.DefaultThumbnailUrl
+            Thumbnails: ThumbnailMapper.MapToThumbnails(youtubeVideo.Thumbnails)
         );
     }
 
@@ -26,9 +25,7 @@ public static class SearchResultMapper
             Id: youtubeChannel.Id.Value,
             Title: youtubeChannel.Title ?? SearchConstants.VideoDefaults.UnknownAuthor,
             Url: youtubeChannel.Url,
-            ThumbnailUrl: youtubeChannel.Thumbnails
-                .OrderByDescending(t => t.Resolution.Area)
-                .FirstOrDefault()?.Url ?? SearchConstants.Thumbnails.DefaultChannelThumbnailUrl
+            Thumbnails: ThumbnailMapper.MapToThumbnails(youtubeChannel.Thumbnails)
         );
     }
 
@@ -41,9 +38,7 @@ public static class SearchResultMapper
             Author: youtubePlaylist.Author?.ChannelTitle ?? SearchConstants.VideoDefaults.UnknownAuthor,
             ChannelId: youtubePlaylist.Author?.ChannelId.Value ?? string.Empty,
             ChannelUrl: youtubePlaylist.Author?.ChannelUrl ?? string.Empty,
-            ThumbnailUrl: youtubePlaylist.Thumbnails
-                .OrderByDescending(t => t.Resolution.Area)
-                .FirstOrDefault()?.Url ?? SearchConstants.Thumbnails.DefaultThumbnailUrl
+            Thumbnails: ThumbnailMapper.MapToThumbnails(youtubePlaylist.Thumbnails)
         );
     }
 }
