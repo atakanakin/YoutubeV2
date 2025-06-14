@@ -41,9 +41,9 @@ builder.Services.AddCors(options =>
     options.AddDefaultPolicy(
         policy =>
         {
-            policy.WithOrigins("http://localhost:3000", "http://localhost:5173")
+            policy.WithOrigins("https://youtube-v2-nu.vercel.app")
                   .WithHeaders("Content-Type", "Authorization")
-                  .WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+                  .WithMethods("GET", "POST", "OPTIONS");
             //   .AllowCredentials(); 
         });
 });
@@ -62,4 +62,4 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 app.MapControllers();
 
-app.Run();
+app.Run("http://0.0.0.0:5000");
