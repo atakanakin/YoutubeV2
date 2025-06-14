@@ -28,7 +28,25 @@ builder.Services.AddSwaggerGen(options =>
 builder.Services.AddMediatR(typeof(Program).Assembly);
 
 // YouTube Client
-builder.Services.AddSingleton<YoutubeClient>();
+builder.Services.AddSingleton<YoutubeClient>(sp =>
+{
+    var httpClient = new HttpClient();
+    httpClient.DefaultRequestHeaders.UserAgent.ParseAdd("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36");
+    return new YoutubeClient(httpClient);
+});
+
+// CORS Policy
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:3000", "http://localhost:5173")
+                  .WithHeaders("Content-Type", "Authorization")
+                  .WithMethods("GET", "POST", "PUT", "DELETE", "OPTIONS");
+            //   .AllowCredentials(); 
+        });
+});
 
 var app = builder.Build();
 
@@ -37,6 +55,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors();
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
